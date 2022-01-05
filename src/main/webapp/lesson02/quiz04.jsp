@@ -20,11 +20,11 @@
 			<form method="post" action="/lesson02/quiz04_1.jsp">
 				<div class="d-flex">
 					<input type="text" name="startNum" class="form-control col-4 mr-1">
-					<select name="symbol" class="form-control col-2 mr-1">
-						<option>+</option>
-						<option>-</option>
-						<option>x</option>
-						<option>÷</option>
+					<select name="operator" class="form-control col-2 mr-1">
+						<option value="plus">+</option>
+						<option value="minus">-</option>
+						<option value="multiple">x</option>
+						<option value="divide">÷</option>
 					</select>
 					<input type="text" name="endNum" class="form-control col-4 mr-1">
 					<input type="submit" value="계산하기" class="btn btn-info">

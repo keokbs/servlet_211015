@@ -11,35 +11,55 @@
  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
+<style>
+	span {color: skyblue}
+</style>
 </head>
 <body>
 <div>
-	<div class="container">
-		<h1>계산 결과</h1>
+
 		<%
 			int startNum = Integer.valueOf(request.getParameter("startNum"));
-			String symbol = request.getParameter("symbol");
+			String operator = request.getParameter("operator");
 			int endNum = Integer.valueOf(request.getParameter("endNum"));
 			double result = 0;
-			if (symbol.equals("+")) {
-				result = startNum + endNum;
-			} else if (symbol.equals("-")) {
-				result = startNum - endNum;
-			} else if (symbol.equals("x")) {
-				symbol = "X";
-				result = startNum * endNum;
-			} else {
-				result = (double)startNum / endNum;
-			}
-			
+
+			 String printOperator = null;
+			 
+			 switch(operator) {
+			 case "plus":
+				 printOperator = "+";
+				 result = startNum + endNum;
+				 break;
+			 case "minus":
+				 printOperator = "-";
+				 result = startNum - endNum;
+				 break;
+			 case "multiple":
+				 printOperator = "X";
+				 result = startNum * endNum;
+				 break;
+			 case "divide":
+				 printOperator = "÷";
+				 result = (double)startNum / endNum;
+				 break;
+			 }
 		%>
-		<div class="d-flex">		
-			<div class="display-3 mr-3"><%= startNum %> </div>
-			<div class="display-3 mr-3"><%= symbol %> </div>
-			<div class="display-3"><%= endNum %> =</div>
-			<div class="display-3 text-info ml-3"><%= result %></div>
+		
+	<div class="container">
+		<h1>계산 결과</h1>
+		<div class="display-1">
+			<%
+				// 3 X 5 = 15.0
+				out.print(startNum + " " + printOperator + " " + endNum + " = ");
+				out.print("<span>" + result + "</span>");
+			
+			%>
+
 		</div>
 	</div>
+	
+	
 </div>
 </body>
 </html>
