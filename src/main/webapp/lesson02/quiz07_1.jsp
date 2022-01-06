@@ -14,7 +14,7 @@
 </head>
 <body>
 <%
-
+// 메뉴 데이터
 List<Map<String, Object>> list = new ArrayList<>();
 
 Map<String, Object> map = new HashMap<String, Object>() {{ put("name", "버거킹"); put("menu", "햄버거"); put("point", 4.3); } };
@@ -32,63 +32,44 @@ list.add(map);
 map = new HashMap<String, Object>() {{ put("name", "반올림피자"); put("menu", "피자"); put("point", 4.3); } };
 list.add(map);
 
-String search = request.getParameter("search"); // 검색어는 무조건 쓴다고 전재
-String pointCheck = null;
-if (request.getParameter("pointCheck") != null) { // null 체크
-	pointCheck = "pointCheck";
-}
-	
 %>
 <div class="container">
 	<h1 class="text-center"> 검색 결과</h1>
 	<table class="table text-center">
-		<tr>
-			<th>메뉴</th>
-			<th>상호</th>
-			<th>별점</th>
-		</tr>
-		<%	
-		// 별점 4점 이하 제외
-		// iterator 사용해 봤는데 많은 iterator가 필요함
-
-		// 체크박스 먼저 확인
-		if (pointCheck != null) { // pointCheck를 했다면
-			// 구현해야할 것
-			for (int i = 0; i < list.size(); i++) {
-				double point = (double) list.get(i).get("point"); // Object 캐스팅
-			// 1. 포인트가 4점 초과인지 확인
-				if (point > 4){
-			// 2. 해당사항이라면 검색어인지 확인
-					if (search.equals(list.get(i).get("menu"))){
-			// 3. 메뉴 상호 별점 모두 출력
-		%>			
-				<tr>
-					<td><%= list.get(i).get("menu") %></td>
-					<td><%= list.get(i).get("name") %></td>
-					<td><%= list.get(i).get("point") %></td>
-				</tr>
-		<%
+		<thead>
+			<tr>
+				<th>메뉴</th>
+				<th>상호</th>
+				<th>별점</th>
+			</tr>
+		</thead>
+		<tbody>
+			<%	
+				
+				String keyword = request.getParameter("keyword");
+				String starPointFilter = request.getParameter("starPointFilter");
+				// 체크 안함 : null, 체크 함 : "true"
+				boolean exclude = starPointFilter != null; 	// = starPointFilter.equals("true");
+															// 체크됨(4점 이하 제외)
+		
+				for (Map<String, Object> item : list) {
+					if (keyword.equals(item.get("menu"))) {
+						
+						if (exclude && ((double)item.get("point") <= 4.0)) { // skip 조건 : 체크가 됨 && 4점 이하
+							continue;
+						}
+			%>			
+						<tr>
+							<td><%= item.get("menu") %></td>
+							<td><%= item.get("name") %></td>
+							<td><%= item.get("point") %></td>
+						</tr>
+			<%
 					}
 				}
-		
-			}
-		} else { // pointCheck를 안했다면
-			for (int i = 0; i < list.size(); i++) {
-				// 1. 검색어 인지 확인
-				if (search.equals(list.get(i).get("menu"))) {
-				// 2. 메뉴 상호 별점 모두 출력
-				%>			
-						<tr>
-							<td><%= list.get(i).get("menu") %></td>
-							<td><%= list.get(i).get("name") %></td>
-							<td><%= list.get(i).get("point") %></td>
-						</tr>
-				<%
-				}
-			}
-		}
-		
-		%>
+			
+			%>
+		</tbody>
 		
 	</table>
 </div>

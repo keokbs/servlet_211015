@@ -14,10 +14,13 @@
 <body>
 	<div class="container">
 		<h1>메뉴 검색</h1>
-		<form method="get" action="/lesson02/quiz07_1.jsp">		
-			<div class="d-flex align-items-center">
-				<input type="text" class="form-control col-3" name="search">
-				<label><input type="checkbox" class="mr-1 ml-3" name="pointCheck" values="pointCheck">4점 이하 제외</label>
+		<form method="post" action="/lesson02/quiz07_1.jsp">		
+			<div class="d-flex">
+				<input type="text" class="form-control col-3" name="keyword">
+				<label  class="mr-1 ml-3 mt-2">
+					<input type="checkbox" name="starPointFilter" values="true">
+					4점 이하 제외
+				</label>
 			</div>
 			<input type="submit" class="btn btn-success mt-2" value="검색">
 		</form>
