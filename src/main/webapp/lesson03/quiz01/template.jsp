@@ -20,6 +20,7 @@ header {height:70px; font-size:30px;}
 menu {height:45px;}
 .nav .nav-item a {color:white;}
 .nav .nav-item a:hover {text-decoration:none; color:white;}
+footer {height:40px;}
 
 </style>
 
@@ -29,11 +30,9 @@ menu {height:45px;}
 	<div id="wrap" class="container">
 		<jsp:include page="header.jsp" />
 		<jsp:include page="menu.jsp" />
-		<jsp:include page="table.jsp" />
+		<jsp:include page="contents.jsp" />
+		<jsp:include page="footer.jsp" />
 		
-		<footer class="text-center">
-			<adress>Copyright © Sk Broadband IPTV 2022</adress>
-		</footer>
 	</div>
 </body>
 </html>
