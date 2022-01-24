@@ -24,6 +24,5 @@ public class GetMethodQuiz06 extends HttpServlet{
 				+ ", \"subtraction\":" + (number1-number2)
 				+ ", \"multiplication\":" + (number1 * number2)
 				+ ", \"division\":" + (number1 / number2) + "}");
-		)
 	}
 }
